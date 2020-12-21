@@ -1,5 +1,5 @@
 /* 
-Este es el primer ejercicio del laboratorio 2: Implementaunprogramaque ofrezca un menú al usuario para realizar las siguientes operaciones con matrices 
+Este es el primer ejercicio del laboratorio 2: Implementa un programa que ofrezca un menú al usuario para realizar las siguientes operaciones con matrices 
 de números reales de tamaño 3x3:
 1.Suma de dos matrices,A y B
 2.Resta de dos matrices, A y B
@@ -7,9 +7,111 @@ de números reales de tamaño 3x3:
 */
 
 #include <stdio.h>
-#include <math.h> // I am using this library to use squirt & pow functions
+#include <stdlib.h>
+
+// Definition of rows and columns size (3 x 3) of matrix
+#define rows 3
+#define colms 3
+
+// Global definition of functions which are going to used then to make operations
+
+void matrixUser (double [rows][colms]); // this is the function which ask to the user the matrix 
+void showMatrix (double [rows][colms]); // this the function which will show to the user selected matrix
+void sumMatrix (double [rows][colms], double [rows][colms]); // this the function which will sum both matrix
+void restMatrix (double [rows][colms], double [rows][colms]); // this the function which will rest both matrix
+void prodMatrix (double [rows][colms], double [rows][colms]); // this the function which will get the product both matrix
+
 
 int main() {
+    // Local definition of variables related to user matrix
+    double matrixA[rows][colms];
+    double matrixB[rows][colms];
+
+    // Asking the user first matrix
+    printf("Please, Enter your first matrix of 3 rows and columns \n");
+    matrixUser(matrixA);
+     // Asking the user second matrix
+    printf("Please, Enter your second matrix of 3 rows and columns \n");
+    matrixUser(matrixB);
+    // Showing to the user selected matrix A & B 
+    showMatrix(matrixA);
+    showMatrix(matrixB);
+    // Matrix's Sum
+    printf("\n This is the sum of your selected matrix \n");
+    sumMatrix(matrixA, matrixB);
+    // Matrix' Rest
+    printf("\n This is the rest of your selected matrix \n");
+    restMatrix(matrixA, matrixB);
+     // Matrix' product
+    printf("\n This is the product of your selected matrix \n");
+    prodMatrix(matrixA, matrixB);
+
 
     return 0;
+}
+
+void matrixUser(double Matrix[rows][colms]) {
+    int row;
+    int colm;
+    printf("\n");
+    for (row = 0; row < rows; row ++) {
+        for (colm = 0; colm < colms; colm ++) {
+            printf("Position %d - %d :", row, colm);
+            scanf(" %lf", &Matrix[row][colm]);
+        }
+    }
+    printf("\n");
+}
+
+void showMatrix(double Matrix[rows][colms]) {
+    int row;
+    int colm;
+    printf("\n");
+    for (row = 0; row < rows; row ++) {
+        for (colm = 0; colm < rows; colm ++) {
+            printf("%6.1lf", Matrix[row][colm]);
+        }
+    printf("\n");
+    }
+}
+
+void sumMatrix (double matrixA[rows][colms], double matrixB[rows][colms]) {
+    int row;
+    int colm;
+    double result[rows][colms];
+    for (row = 0; row < rows; row ++) {
+        for (colm = 0; colm < colms; colm ++) {
+            result[row][colm] = matrixA[row][colm] + matrixB[row][colm];
+        }
+    }
+    showMatrix(result);
+}
+
+void restMatrix (double matrixA[rows][colms], double matrixB[rows][colms]) {
+    int row;
+    int colm;
+    double result[rows][colms];
+    for (row = 0; row < rows; row ++) {
+        for (colm = 0; colm < colms; colm ++) {
+            result[row][colm] = matrixA[row][colm] - matrixB[row][colm];
+        }
+    }
+    showMatrix(result);
+}
+
+void prodMatrix (double matrixA[rows][colms], double matrixB[rows][colms]) {
+    int row;
+    int colm;
+    double result[rows][colms];
+    for (int colB = 0; colB < colms; colB ++) {
+        for (int rowA = 0; rowA < rows; rowA ++) {
+            int sum = 0;
+            for (int colA = 0; colA < colms; colA++) {
+                sum += matrixA[rowA][colA] * matrixB[colA][colB]; 
+            }
+            
+            result[rowA][colB] = sum;
+        }
+    }
+    showMatrix(result);
 }
