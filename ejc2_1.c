@@ -14,6 +14,7 @@ de números reales de tamaño 3x3:
 #define colms 3
 
 // Global definition of functions which are going to used then to make operations
+// Remember we are using real numbers so, we need define functions variables as double
 
 void matrixUser (double [rows][colms]); // this is the function which ask to the user the matrix 
 void showMatrix (double [rows][colms]); // this the function which will show to the user selected matrix
@@ -47,7 +48,7 @@ int main() {
         do {
              printf( "Introduce an option (1-4): \n"); // Filter user choosen operation
              scanf( " %c", &option1);
-            } while ( option1 < '1' || option1 > '4' ); // It has to be between 1-6
+            } while ( option1 < '1' || option1 > '4' ); // It has to be between 1-4
         
         switch ( option1 ){
 
@@ -63,7 +64,7 @@ int main() {
                         printf("\n This is the product of your selected matrix \n");
                         prodMatrix(matrixA, matrixB);
             } 
-        } while ( option1 != '4' ); // Option 6: exit from the calculator
+        } while ( option1 != '4' ); // Option 4: exit from the matrix operation machine
        
 
     return 0;
@@ -76,7 +77,7 @@ void matrixUser(double Matrix[rows][colms]) {
     for (row = 0; row < rows; row ++) {
         for (colm = 0; colm < colms; colm ++) {
             printf("Position %d - %d :", row, colm);
-            scanf(" %lf", &Matrix[row][colm]);
+            scanf(" %lf", &Matrix[row][colm]); //validate float
         }
     }
     printf("\n");
@@ -88,7 +89,7 @@ void showMatrix(double Matrix[rows][colms]) {
     printf("\n");
     for (row = 0; row < rows; row ++) {
         for (colm = 0; colm < rows; colm ++) {
-            printf("%6.1lf", Matrix[row][colm]);
+            printf("%6.1lf", Matrix[row][colm]); //we are using only 1 decimal, and separeting them to see better 
         }
     printf("\n");
     }
@@ -98,8 +99,8 @@ void sumMatrix (double matrixA[rows][colms], double matrixB[rows][colms]) {
     int row;
     int colm;
     double result[rows][colms];
-    for (row = 0; row < rows; row ++) {
-        for (colm = 0; colm < colms; colm ++) {
+    for (row = 0; row < rows; row ++) { //iterating through rows
+        for (colm = 0; colm < colms; colm ++) { //iterating through columns
             result[row][colm] = matrixA[row][colm] + matrixB[row][colm];
         }
     }
@@ -122,11 +123,11 @@ void prodMatrix (double matrixA[rows][colms], double matrixB[rows][colms]) {
     int row;
     int colm;
     double result[rows][colms];
-    for (int colB = 0; colB < colms; colB ++) {
-        for (int rowA = 0; rowA < rows; rowA ++) {
+    for (int colB = 0; colB < colms; colB ++) { //first iterate through column of second matrix
+        for (int rowA = 0; rowA < rows; rowA ++) { //then iterate through rows of first matrix
             int sum = 0;
-            for (int colA = 0; colA < colms; colA++) {
-                sum += matrixA[rowA][colA] * matrixB[colA][colB]; 
+            for (int colA = 0; colA < colms; colA++) { //now we have to get columns of first matrix to convert in row of second matrix
+                sum += matrixA[rowA][colA] * matrixB[colA][colB]; // iterating in first matrix into second matrix column to sum result
             }
             
             result[rowA][colB] = sum;
