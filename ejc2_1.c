@@ -26,6 +26,7 @@ int main() {
     // Local definition of variables related to user matrix
     double matrixA[rows][colms];
     double matrixB[rows][colms];
+    char option1;
 
     // Asking the user first matrix
     printf("Please, Enter your first matrix of 3 rows and columns \n");
@@ -36,16 +37,34 @@ int main() {
     // Showing to the user selected matrix A & B 
     showMatrix(matrixA);
     showMatrix(matrixB);
-    // Matrix's Sum
-    printf("\n This is the sum of your selected matrix \n");
-    sumMatrix(matrixA, matrixB);
-    // Matrix' Rest
-    printf("\n This is the rest of your selected matrix \n");
-    restMatrix(matrixA, matrixB);
-     // Matrix' product
-    printf("\n This is the product of your selected matrix \n");
-    prodMatrix(matrixA, matrixB);
+    
+    do {
+        printf( "\n--Choose an operation to do-- \n\n" );
+                    printf( "1) Sum two matrix \n");
+                    printf( "2) Rest two matrix \n");
+                    printf( "3) Multiply two matrix \n");
+                    printf( "4) Exit \n\n" );
+        do {
+             printf( "Introduce an option (1-4): \n"); // Filter user choosen operation
+             scanf( " %c", &option1);
+            } while ( option1 < '1' || option1 > '4' ); // It has to be between 1-6
+        
+        switch ( option1 ){
 
+            case '1':  // Matrix's Sum
+                        printf("\n This is the sum of your selected matrix \n");
+                        sumMatrix(matrixA, matrixB);
+                        break;
+            case '2':  // Matrix' Rest
+                        printf("\n This is the rest of your selected matrix \n");
+                        restMatrix(matrixA, matrixB);
+                        break;
+            case '3':   // Matrix' product
+                        printf("\n This is the product of your selected matrix \n");
+                        prodMatrix(matrixA, matrixB);
+            } 
+        } while ( option1 != '4' ); // Option 6: exit from the calculator
+       
 
     return 0;
 }
