@@ -16,6 +16,7 @@ del siguiente modo:
 int tallTree,trunkTree; //defining tree sizes
 int j,k,m,i; // iterators
 char formatTree; // defining tree
+int Array_Max;
 
 int main() {
             
@@ -48,4 +49,13 @@ int main() {
                             
 
         return 0;
+}
+
+void print(char * matriz , int m, int n){
+    for (int i = 0; i < m; i++ ){
+        for (int j = 0; j < n; j++){
+            printf("%c", *(matriz + i*Array_Max + j));
+        }
+        printf("\n");
+    }
 }
