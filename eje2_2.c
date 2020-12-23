@@ -30,41 +30,46 @@ typedef struct person {
     struct address address_person;
 } Person;
 
-// Global definition of functions which are going to used then to make operations
-void showPerson (Person* person);
+// Global definition of show information function
+void showPerson (struct person);
 
 int main() {
 
-    struct person p;
-    struct address a;
+    struct person p; // we use p instance here
     
     printf( "Please, introduce your name here: \n" );
-	scanf( " %s", &p.name );
+    fgets(p.name, 30, stdin); // better use fgets function here to avoid blanks
+    p.name[strcspn(p.name, "\r\n")]= 0; // this function avoid line break of fgets
     printf( "Please, introduce your first surname here: \n" );
-	scanf( " %s", &p.surname1 );
+    fgets(p.surname1, 30, stdin);
+    p.surname1[strcspn(p.surname1, "\r\n")]= 0;
     printf( "Please, introduce your second surname here: \n" );
-	scanf( " %s", &p.surname2 );
+	fgets(p.surname2, 30, stdin);
+    p.surname2[strcspn(p.surname2, "\r\n")]= 0;
+    printf( "Please, introduce your country: \n" );
+	fgets(p.address_person.country, 30, stdin ); // we nesting in the structures of person and address
+    p.address_person.country[strcspn(p.address_person.country, "\r\n")]= 0;
+    printf( "Please, introduce your city: \n" );
+	fgets(p.address_person.city, 30, stdin); 
+    p.address_person.city[strcspn(p.address_person.city, "\r\n")]= 0;
+    printf( "Please, introduce your street: \n" );
+	fgets(p.address_person.street, 30, stdin);
+    p.address_person.street[strcspn(p.address_person.street, "\r\n")]= 0;
+    printf( "Please, introduce your street number: \n" );
+	scanf( " %d", &p.address_person.number );
+    printf( "Please, introduce your flat number: \n" );
+	scanf( " %d", &p.address_person.flat );
+    printf( "Please, introduce your flat letter: \n" );
+	scanf( " %s", p.address_person.letter );
     printf( "Please, introduce your age here: \n" );
 	scanf( " %d", &p.age );
-    printf( "Please, introduce your country: \n" );
-	scanf( " %s", &a.country );
-    printf( "Please, introduce your city: \n" );
-	scanf( " %s", &a.city );
-    printf( "Please, introduce your street: \n" );
-	scanf( " %s", &a.street );
-    printf( "Please, introduce your street number: \n" );
-	scanf( " %d", &a.number );
-    printf( "Please, introduce your flat number: \n" );
-	scanf( " %d", &a.flat );
-    printf( "Please, introduce your flat letter: \n" );
-	scanf( " %s", &a.letter );
 
-    //showPerson(Person person);
+    showPerson(p); //calling function with the instance
     return 0;
 }
 
-void showPerson (Person* person){ 
-    printf("There is your personal information: \n%s %s %s %s \n",
-    (*person).name, (*person).surname1, (*person).surname2, (*person).address_person);
-    printf("Your age is: %d \n", (*person).age);
+void showPerson (struct person data){ //defining fnction
+    printf("There is your personal information: \n %s %s %s \nyour address is:\n %s %d - %dº%s, %s (%s)\nand you are: \n%d years old\n",
+    data.name, data.surname1, data.surname2, data.address_person.street, data.address_person.number, data.address_person.flat, data.address_person.letter, 
+    data.address_person.city, data.address_person.country, data.age);
 }
