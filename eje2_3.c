@@ -6,7 +6,9 @@ Nota: asume que cada palabra puede tener un máximo de 20 caracteres.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string.h> // interesting library for handle string
+#include <ctype.h> // useful librayu for handle capital letters issue ordering
+
 #define length 20
 
 // Defining neccesary data structure
@@ -14,8 +16,7 @@ typedef struct abcde {
     char word[length];
 } Abcde;
 
-// Global definition of show information function
-//void showAbcde (struct abcde);
+char aux[length]; // auxiliar string
 
 int main() {
 
@@ -34,8 +35,26 @@ int main() {
     }
     p_word = &w[0];
 
-    for (int i = 0; i < 10; i++) {
-        printf("The word is %s \n", w[i].word);
+    // Now we are going to order our words/strings
+    int l = 10; // ten words
+    int i, j, k, n; // define different iterators
+    for(i = 0; i < l-1; i++) { // initiate burble 
+         
+        k=i;
+        strcpy(aux, w[i].word); // function to copy temporaly in auxiliar string our words, handling transitions 
+        for(j=i+1; j<l; j++) {
+            n = strcasecmp(w[j].word, aux); // great function to handle capital letters problems
+            if(n < 0) {
+                k=j;
+                strcpy(aux, w[j].word);
+            }
+        }
+        strcpy(w[k].word,w[i].word);
+        strcpy(w[i].word,aux);
+    }
+
+    for (i = 0; i < l; i++) {
+        printf("The word %i is %s \n", i, w[i].word); // now iterating to show ordered words
 
         p_word++;
     }
