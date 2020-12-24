@@ -12,22 +12,23 @@ del siguiente modo:
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ncurses.h>
 
 int tallTree,trunkTree; //defining tree sizes
 int j,k,m,i; // iterators
-char formatTree; // defining tree
 int Array_Max;
+int number;
 
 int main() {
             
             do {
-                printf ("\nHello user! Give me a number and I will drawn a christmas tree for you \n");
-                printf("Your selected number it has to be between 4 and 20 \n");
-                printf("Then, select your tree's type: number, letter or symbol \n");
-                scanf ("%d %c", &tallTree, &formatTree); //reading user inputs
+                printf ("\nHello user! Give me a number over 3 and I will drawn a christmas tree for you \n");
+                scanf ("%d", &tallTree); //reading user inputs
+                number = randomize();
+                printf("%d", &number);
                     }
                         
-                while (tallTree < 3 || tallTree > 20); //limiting tree dimensions
+                while (tallTree < 3); //limiting tree dimensions
                     
                 for (i=0, j=tallTree; i<tallTree; i++, j--) { // bucle to drawn left side of the tree
                     for(k=0; k<j; k++){
@@ -35,7 +36,7 @@ int main() {
                         }
                         for(m=tallTree; m>=j; m--){ // bucle to drawn the tree
                             printf(" "); //a space in each iteration
-                            printf ("%c", formatTree); //a character in each iteration
+                            printf ("^"); //a character in each iteration
                                 }
                                 printf ("\n");
                             }
@@ -44,7 +45,7 @@ int main() {
                             for(j=1; j<=trunkTree; j++){  // bucle to drawn the trunk tree
                                 for(i=0; i<tallTree; i++)
                                 printf(" ");
-                                printf(" %c\n", formatTree);
+                                printf(" M\n");
                             }
                             
 
