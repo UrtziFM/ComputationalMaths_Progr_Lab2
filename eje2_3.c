@@ -20,7 +20,7 @@ char aux[length]; // auxiliar string
 
 int main() {
 
-    struct abcde w[length], *p_word; // we use w instance here and pointer
+    struct abcde w[length], *p_word; // we use w instance here and a pointer to keep memory space
 
     p_word = &w[0]; //point to first position
 
