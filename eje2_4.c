@@ -11,33 +11,46 @@ del siguiente modo:
 
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <ncurses.h>
+#include <stdlib.h>     // rand(), srand()
+#include <time.h>       // time()
 
 int tallTree,trunkTree; //defining tree sizes
 int j,k,m,i; // iterators
 int Array_Max;
-int number;
+
+void print(char * matrix , int m, int n){
+    for (int i = 0; i < m; i++ ){
+        for (int j = 0; j < n; j++){
+            printf("%c", *(matrix + i*Array_Max + j));
+        }
+        printf("\n");
+    }
+}
 
 int main() {
+
+            int totalTree  = tallTree + trunkTree;
+            int widthTree = 2*tallTree-1;
+            char tree[totalTree][widthTree];
+            Array_Max = widthTree;
+
             
             do {
                 printf ("\nHello user! Give me a number over 3 and I will drawn a christmas tree for you \n");
                 scanf ("%d", &tallTree); //reading user inputs
-                number = randomize();
-                printf("%d", &number);
                     }
                         
                 while (tallTree < 3); //limiting tree dimensions
                     
-                for (i=0, j=tallTree; i<tallTree; i++, j--) { // bucle to drawn left side of the tree
-                    for(k=0; k<j; k++){
-                        printf(" ");
+                for (i=0;i<tallTree; i++) { // bucle to drawn left side of the tree
+                    for( int j = 0; j <widthTree; j++ ){
+                        tree[i][j] = ' ';
                         }
-                        for(m=tallTree; m>=j; m--){ // bucle to drawn the tree
-                            printf(" "); //a space in each iteration
-                            printf ("^"); //a character in each iteration
-                                }
+                        for( int j = 0; j < i; j++ ){
+                            tree[i][tallTree-j-1] = '*';
+                            tree[i][tallTree+j+1] = '*';
+                            }
+
                                 printf ("\n");
                             }
                             trunkTree = tallTree/3; //defining trunk tree size
@@ -47,16 +60,12 @@ int main() {
                                 printf(" ");
                                 printf(" M\n");
                             }
+
+            printf("==========================================\n");
+            print((char*)tree,totalTree,widthTree);
+            printf("\n Merry xMas!\n");
                             
 
         return 0;
 }
 
-void print(char * matriz , int m, int n){
-    for (int i = 0; i < m; i++ ){
-        for (int j = 0; j < n; j++){
-            printf("%c", *(matriz + i*Array_Max + j));
-        }
-        printf("\n");
-    }
-}
