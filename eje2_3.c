@@ -33,7 +33,7 @@ int main() {
 
         p_word++; //next iteration
     }
-    p_word = &w[0];
+    // p_word = &w[0];
 
     // Now we are going to order our words/strings
     int l = 10; // ten words
