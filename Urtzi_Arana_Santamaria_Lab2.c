@@ -11,6 +11,7 @@
 #define colms 3 // Fisrt exercise Matriz columns
 #define length 30 // Second exercise 
 #define length_w 20 // Third exercise
+#define n_words 10 // Third exercise total words
 
 //Defining neccesary structures 
 typedef struct address {
@@ -38,7 +39,7 @@ typedef struct abcde {
     char word[length_w];
 } Abcde;
 
-struct abcde w[length_w], *p_word; // we use w instance here and a pointer to keep memory space
+struct abcde w[length_w]; // we use w instance here and a pointer to keep memory space
 
 // Global variables for exercises
 
@@ -166,7 +167,6 @@ int main() {
 
               case '3':
                         // Asking user 10 words
-                         p_word = &w[0]; //point to first position
 
                         //Now we need a bucle for to get user's ten words:
                         for (int i = 0; i < 10; i++) {
@@ -175,19 +175,19 @@ int main() {
 
                             while(getchar() != '\n'); // cleaning entry buffer
 
-                            p_word++; //next iteration
                         }
 
                         // Now we are going to order our words/strings
-                        int l = 10; // ten words
-                        int i, j, k, n; // define different iterators
-                        for(i = 0; i < l-1; i++) { // initiate burble 
+                        int total_words = n_words; // ten words
+                        int i, j, k; // define different counters
+                        int lowercase; //variable for comparaing lowercase
+                        for(i = 0; i < total_words-1; i++) { // initiate burble 
                             
                             k=i;
                             strcpy(aux, w[i].word); // function to copy temporaly in auxiliar string our words, handling transitions 
-                            for(j=i+1; j<l; j++) {
-                                n = strcasecmp(w[j].word, aux); // great function to handle capital letters problems
-                                if(n < 0) {
+                            for(j=i+1; j<total_words; j++) {
+                                lowercase = strcasecmp(w[j].word, aux); // great function to handle capital letters problems
+                                if(lowercase < 0) {
                                     k=j;
                                     strcpy(aux, w[j].word);
                                 }
@@ -196,10 +196,9 @@ int main() {
                             strcpy(w[i].word,aux);
                         }
 
-                        for (i = 0; i < l; i++) {
+                        for (i = 0; i < total_words; i++) {
                             printf("The word %i is %s \n", i, w[i].word); // now iterating to show ordered words
 
-                            p_word++;
                         } break;
                  
                  case '4': 
